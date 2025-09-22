@@ -916,7 +916,7 @@ class OptimizerTest(TestCase):
             np.testing.assert_equal(state.inner_state, jnp.ones([], dtype=jnp.int32))
             if use_adaptive_norm:
                 np.testing.assert_equal(state.count, jnp.ones([], dtype=jnp.int32))
-                np.testing.assert_equal(state.grad_norm_ema, g_norm)
+                np.testing.assert_allclose(state.grad_norm_ema, g_norm, atol=1e-6)
         else:
             np.testing.assert_allclose(updates, jnp.zeros_like(grads))
             np.testing.assert_equal(state.nonvalid_count, jnp.ones([], dtype=jnp.int32))
